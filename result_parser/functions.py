@@ -1,6 +1,4 @@
 """ Helper Methods"""
-import click
-from icecream import ic
 import pandas as pd
 import re
 
@@ -14,6 +12,7 @@ def parse_file_data(file=None):
             # Get ONLY the name, remove whitespaces and NL tag
             team1_name = ''.join((c for c in temp[0] if not c.isdigit())).strip("\n").strip()
             team2_name = ''.join((c for c in temp[1]if not c.isdigit())).strip("\n").strip()
+            # Retrieve the Scores for both teams
             team1_score = re.search(r'\d+', temp[0]).group()
             team2_score = re.search(r'\d+', temp[1]).group()
             # Initialize new Keys with value of 0
@@ -37,8 +36,3 @@ def parse_file_data(file=None):
         df.set_index(keys=['Teams'],inplace=True, drop=True)
         file_data.close()
         return df
-
-
-def parse_input_string(input_string: str):
-
-    return True
